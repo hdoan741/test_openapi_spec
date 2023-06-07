@@ -1,0 +1,2653 @@
+// 20230607124350
+// https://testing.intelliprove.com/openapi.json
+
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/run/": {
+      "get": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Get Runs",
+        "description": "Get all runs, queued, active, failed, etc.",
+        "operationId": "get_runs_run__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Start",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "start",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "N",
+              "type": "integer",
+              "default": 30
+            },
+            "name": "n",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "run"
+        ],
+        "summary": "New Run",
+        "description": "Schedule new run",
+        "operationId": "new_run_run__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/run/tag/{tag}": {
+      "get": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Get Runs With Tag",
+        "description": "Get all runs with a tag.",
+        "operationId": "get_runs_with_tag_run_tag__tag__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Tag",
+              "type": "string"
+            },
+            "name": "tag",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Start",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "start",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "N",
+              "type": "integer",
+              "default": 30
+            },
+            "name": "n",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/run/{rid}": {
+      "get": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Get Run",
+        "description": "Get run details by id",
+        "operationId": "get_run_run__rid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Vid",
+              "type": "string"
+            },
+            "name": "vid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Set Status",
+        "description": "Set status of a run",
+        "operationId": "set_status_run__rid__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Rid",
+              "type": "string"
+            },
+            "name": "rid",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Status",
+              "type": "integer",
+              "default": 2
+            },
+            "name": "status",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Cancel Run",
+        "description": "Cancel a scheduled run, to delete runs set 'hard' param",
+        "operationId": "cancel_run_run__rid__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Rid",
+              "type": "string"
+            },
+            "name": "rid",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Hard",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "hard",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/list": {
+      "get": {
+        "tags": [
+          "video"
+        ],
+        "summary": "List Videos",
+        "description": "Get available videos for processing",
+        "operationId": "list_videos_video_list_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Start",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "start",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "N",
+              "type": "integer",
+              "default": 30
+            },
+            "name": "n",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/all": {
+      "get": {
+        "tags": [
+          "video"
+        ],
+        "summary": "List All Videos",
+        "description": "Get a list of all available videos, expensive call but cached",
+        "operationId": "list_all_videos_video_all_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/s3": {
+      "get": {
+        "tags": [
+          "video"
+        ],
+        "summary": "List S3 Videos",
+        "description": "Get all video keys on s3",
+        "operationId": "list_s3_videos_video_s3_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/filter": {
+      "post": {
+        "tags": [
+          "video"
+        ],
+        "summary": "Filter Video",
+        "description": "filter videos by post",
+        "operationId": "filter_video_video_filter_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Start",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "start",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "N",
+              "type": "integer",
+              "default": 30
+            },
+            "name": "n",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VideoFilter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/gt": {
+      "post": {
+        "tags": [
+          "video"
+        ],
+        "summary": "Filter Video By Gt",
+        "description": "filter videos by post",
+        "operationId": "filter_video_by_gt_video_gt_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Start",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "start",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "N",
+              "type": "integer",
+              "default": 30
+            },
+            "name": "n",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroundTruthFilter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/gt/{vid}": {
+      "get": {
+        "tags": [
+          "video"
+        ],
+        "summary": "Get Gt Signals For Video",
+        "description": "Get ground truth signals from s3 for video id",
+        "operationId": "get_gt_signals_for_video_video_gt__vid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Vid",
+              "type": "string"
+            },
+            "name": "vid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/count": {
+      "get": {
+        "tags": [
+          "video"
+        ],
+        "summary": "Count Db And Storage",
+        "description": "return a count of all items in the database and in S3",
+        "operationId": "count_db_and_storage_video_count_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/{vid}": {
+      "get": {
+        "tags": [
+          "video"
+        ],
+        "summary": "Get Video",
+        "description": "Get a video by id",
+        "operationId": "get_video_video__vid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Vid",
+              "type": "string"
+            },
+            "name": "vid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "video"
+        ],
+        "summary": "Delete Video",
+        "description": "Delete a video by id",
+        "operationId": "delete_video_video__vid__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Vid",
+              "type": "string"
+            },
+            "name": "vid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/{vid}/frame": {
+      "get": {
+        "tags": [
+          "video"
+        ],
+        "summary": "Get Frame For Video",
+        "description": "Get one frame from a video",
+        "operationId": "get_frame_for_video_video__vid__frame_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Vid",
+              "type": "string"
+            },
+            "name": "vid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/{run_id}/{video_id}": {
+      "get": {
+        "tags": [
+          "results"
+        ],
+        "summary": "Get Result By Video",
+        "description": "Get the results for a certain video of a certain run.",
+        "operationId": "get_result_by_video_results__run_id___video_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            },
+            "name": "run_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Video Id",
+              "type": "string"
+            },
+            "name": "video_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/{run_id}": {
+      "get": {
+        "tags": [
+          "results"
+        ],
+        "summary": "Get Results",
+        "description": "Get all the results for a certain run.",
+        "operationId": "get_results_results__run_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            },
+            "name": "run_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Start",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "start",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "N",
+              "type": "integer",
+              "default": 30
+            },
+            "name": "n",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/": {
+      "post": {
+        "tags": [
+          "results"
+        ],
+        "summary": "Upload Result",
+        "description": "Add a new run result for a video",
+        "operationId": "upload_result_results__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadVideoRunResult"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/compare/video": {
+      "post": {
+        "tags": [
+          "results"
+        ],
+        "summary": "Compare Video Results",
+        "description": "Compare a videos results between runs",
+        "operationId": "compare_video_results_results_compare_video_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompareVideoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/compare/runs": {
+      "post": {
+        "tags": [
+          "results"
+        ],
+        "summary": "Compare Runs Results",
+        "description": "Compare a videos results between runs",
+        "operationId": "compare_runs_results_results_compare_runs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompareRunsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/compare/run/{run_id}": {
+      "get": {
+        "tags": [
+          "results"
+        ],
+        "summary": "Compare Run Results",
+        "description": "Compare a videos results between runs",
+        "operationId": "compare_run_results_results_compare_run__run_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            },
+            "name": "run_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Make Csv",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "make_csv",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/compare/run/{run_id}/download": {
+      "get": {
+        "tags": [
+          "results"
+        ],
+        "summary": "Download Run Csv",
+        "description": "Compare a videos results between runs",
+        "operationId": "download_run_csv_results_compare_run__run_id__download_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            },
+            "name": "run_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Include Meta",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "include_meta",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/video/{video_id}": {
+      "get": {
+        "tags": [
+          "stream"
+        ],
+        "summary": "Main",
+        "operationId": "main_stream_video__video_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Video Id",
+              "type": "string"
+            },
+            "name": "video_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/download/{vid}": {
+      "get": {
+        "tags": [
+          "stream"
+        ],
+        "summary": "Download Video",
+        "operationId": "download_video_stream_download__vid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Vid",
+              "type": "string"
+            },
+            "name": "vid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/other/tags": {
+      "get": {
+        "tags": [
+          "other"
+        ],
+        "summary": "Get Tags",
+        "description": "Get all tags",
+        "operationId": "get_tags_other_tags_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "other"
+        ],
+        "summary": "Add Tag",
+        "description": "Add a new tag",
+        "operationId": "add_tag_other_tags_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/other/tags/{tag}": {
+      "delete": {
+        "tags": [
+          "other"
+        ],
+        "summary": "Delete Tag",
+        "description": "delete a tag",
+        "operationId": "delete_tag_other_tags__tag__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Tag",
+              "type": "string"
+            },
+            "name": "tag",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/other/bin": {
+      "post": {
+        "tags": [
+          "other"
+        ],
+        "summary": "Binned Results",
+        "description": "return the bins for a columns of multiple runs",
+        "operationId": "binned_results_other_bin_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BinnedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/other/cache": {
+      "delete": {
+        "tags": [
+          "other"
+        ],
+        "summary": "Clear Cache",
+        "description": "Clear csv cache and json response cache",
+        "operationId": "clear_cache_other_cache_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/other/s3/trailing": {
+      "get": {
+        "tags": [
+          "other"
+        ],
+        "summary": "Get Trailing S3 Videos",
+        "description": "Get all videos that are present on S3 but not in the database",
+        "operationId": "get_trailing_s3_videos_other_s3_trailing_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/video": {
+      "put": {
+        "tags": [
+          "data"
+        ],
+        "summary": "Update Video",
+        "description": "Update an existing videos details",
+        "operationId": "update_video_data_video_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VideoDetails"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "data"
+        ],
+        "summary": "Add New Video",
+        "description": "Add a new video to the database with ground truths",
+        "operationId": "add_new_video_data_video_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VideoDetails"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aws/ecs/service/stop": {
+      "get": {
+        "tags": [
+          "aws"
+        ],
+        "summary": "Stop Ecs Service",
+        "description": "stop engine ecs tasks for testing manager",
+        "operationId": "stop_ecs_service_aws_ecs_service_stop_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Service Name",
+              "type": "string",
+              "default": "main-engine-service-testing"
+            },
+            "name": "service_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aws/ecs/service/start": {
+      "get": {
+        "tags": [
+          "aws"
+        ],
+        "summary": "Start Ecs Service",
+        "operationId": "start_ecs_service_aws_ecs_service_start_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Service Name",
+              "type": "string",
+              "default": "main-engine-service-testing"
+            },
+            "name": "service_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aws/ecs/task/killall": {
+      "get": {
+        "tags": [
+          "aws"
+        ],
+        "summary": "Force Stop All Tasks",
+        "operationId": "force_stop_all_tasks_aws_ecs_task_killall_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Cluster Name",
+              "type": "string",
+              "default": "main-engine-cluster-testing"
+            },
+            "name": "cluster_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aws/ec2/list": {
+      "get": {
+        "tags": [
+          "aws"
+        ],
+        "summary": "List Ec2 Instances",
+        "operationId": "list_ec2_instances_aws_ec2_list_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aws/ec2/stop/{instance_id}": {
+      "get": {
+        "tags": [
+          "aws"
+        ],
+        "summary": "Stop Ec2 Instance",
+        "operationId": "stop_ec2_instance_aws_ec2_stop__instance_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Instance Id",
+              "type": "string"
+            },
+            "name": "instance_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aws/ec2/start/{instance_id}": {
+      "get": {
+        "tags": [
+          "aws"
+        ],
+        "summary": "Start Ec2 Instance",
+        "operationId": "start_ec2_instance_aws_ec2_start__instance_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Instance Id",
+              "type": "string"
+            },
+            "name": "instance_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/video": {
+      "get": {
+        "tags": [
+          "test",
+          "smoke"
+        ],
+        "summary": "Smoke Test Video Calls",
+        "description": "Test some of the APIs video functionality",
+        "operationId": "smoke_test_video_calls_tests_video_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/runs": {
+      "get": {
+        "tags": [
+          "test",
+          "smoke"
+        ],
+        "summary": "Smoke Test Run Calls",
+        "description": "Test some of the APIs run functionality",
+        "operationId": "smoke_test_run_calls_tests_runs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/results": {
+      "get": {
+        "tags": [
+          "test",
+          "smoke"
+        ],
+        "summary": "Smoke Test Results",
+        "description": "Test some the APIs run result functionality",
+        "operationId": "smoke_test_results_tests_results_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnxietySensor": {
+        "title": "AnxietySensor",
+        "enum": [
+          "SELF_REPORTING_FORM_COMPETITIVE_STATE_ANXIETY_INVENTORY"
+        ],
+        "description": "An enumeration."
+      },
+      "BPSensor": {
+        "title": "BPSensor",
+        "enum": [
+          "OMRONEVOLV",
+          "PHILIPS_MP5SC",
+          "OMRON_M6_COMFORT",
+          "OMRON_X4_SMART_HEM_7155T_ESL"
+        ],
+        "description": "An enumeration."
+      },
+      "BinnedRequest": {
+        "title": "BinnedRequest",
+        "required": [
+          "run_ids",
+          "column"
+        ],
+        "type": "object",
+        "properties": {
+          "run_ids": {
+            "title": "Run Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "column": {
+            "title": "Column",
+            "type": "string"
+          }
+        }
+      },
+      "BooleanFilter": {
+        "title": "BooleanFilter",
+        "type": "object",
+        "properties": {
+          "value": {
+            "title": "Value",
+            "type": "boolean"
+          }
+        }
+      },
+      "CodingStandard": {
+        "title": "CodingStandard",
+        "enum": [
+          "H264",
+          "H265",
+          "H120",
+          "H261",
+          "MJPEG",
+          "MPEG1PART2",
+          "H262",
+          "DV",
+          "H263",
+          "MPEG4PART2",
+          "MJ2",
+          "THEORA",
+          "VC1",
+          "APPLEPRORES",
+          "AV1",
+          "H266",
+          "RV24",
+          "RAWV",
+          "MJPG"
+        ],
+        "description": "An enumeration."
+      },
+      "CompareRunsRequest": {
+        "title": "CompareRunsRequest",
+        "required": [
+          "run_ids"
+        ],
+        "type": "object",
+        "properties": {
+          "run_ids": {
+            "title": "Run Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CompareVideoRequest": {
+        "title": "CompareVideoRequest",
+        "required": [
+          "video_id",
+          "run_ids"
+        ],
+        "type": "object",
+        "properties": {
+          "video_id": {
+            "title": "Video Id",
+            "type": "string"
+          },
+          "run_ids": {
+            "title": "Run Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Compression": {
+        "title": "Compression",
+        "enum": [
+          "LOSSY",
+          "LOSSLESS"
+        ],
+        "description": "An enumeration."
+      },
+      "CreateRunRequest": {
+        "title": "CreateRunRequest",
+        "required": [
+          "name",
+          "desc",
+          "when",
+          "config",
+          "settings"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "desc": {
+            "title": "Desc",
+            "type": "string"
+          },
+          "when": {
+            "title": "When",
+            "type": "string",
+            "format": "date-time"
+          },
+          "config": {
+            "title": "Config",
+            "type": "string"
+          },
+          "settings": {
+            "title": "Settings",
+            "type": "string"
+          },
+          "videos": {
+            "title": "Videos",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              
+            ]
+          },
+          "tags": {
+            "title": "Tags",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              
+            ]
+          }
+        }
+      },
+      "DatetimeFilter": {
+        "title": "DatetimeFilter",
+        "type": "object",
+        "properties": {
+          "start": {
+            "title": "Start",
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "title": "End",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Ethnicity": {
+        "title": "Ethnicity",
+        "enum": [
+          "ASIAN",
+          "BLACK",
+          "HISPANIC",
+          "WHITE"
+        ],
+        "description": "Categories based on (US) official categories.\nSource: https://www.census.gov/newsroom/blogs/random-samplings/2021/08/measuring-racial-ethnic-diversity-2020-census.html"
+      },
+      "ExistsFilter": {
+        "title": "ExistsFilter",
+        "type": "object",
+        "properties": {
+          "exists": {
+            "title": "Exists",
+            "type": "boolean"
+          }
+        }
+      },
+      "GeographicalInfo": {
+        "title": "GeographicalInfo",
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "title": "Latitude",
+            "type": "number"
+          },
+          "longitude": {
+            "title": "Longitude",
+            "type": "number"
+          },
+          "altitude": {
+            "title": "Altitude",
+            "type": "number"
+          }
+        }
+      },
+      "GroundTruthFilter": {
+        "title": "GroundTruthFilter",
+        "type": "object",
+        "properties": {
+          "hr": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "o2": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "rr": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "bp_sys": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "bp_dia": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "ibis_ms": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "anxiety": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "rmssd": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          },
+          "baevsky_si": {
+            "$ref": "#/components/schemas/ExistsFilter"
+          }
+        }
+      },
+      "GroundTruthValues": {
+        "title": "GroundTruthValues",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "video_id": {
+            "title": "Video Id",
+            "type": "string",
+            "default": ""
+          },
+          "hr": {
+            "title": "Hr",
+            "maximum": 220.0,
+            "minimum": 35.0,
+            "type": "number"
+          },
+          "o2": {
+            "title": "O2",
+            "maximum": 100.0,
+            "minimum": 70.0,
+            "type": "number"
+          },
+          "rr": {
+            "title": "Rr",
+            "maximum": 70.0,
+            "minimum": 4.0,
+            "type": "number"
+          },
+          "bp_sys": {
+            "title": "Bp Sys",
+            "maximum": 200.0,
+            "minimum": 70.0,
+            "type": "number"
+          },
+          "bp_dia": {
+            "title": "Bp Dia",
+            "maximum": 120.0,
+            "minimum": 50.0,
+            "type": "number"
+          },
+          "ibis_ms": {
+            "title": "Ibis Ms",
+            "maximum": 1500.0,
+            "minimum": 333.0,
+            "type": "number"
+          },
+          "anxiety": {
+            "title": "Anxiety",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "rmssd": {
+            "title": "Rmssd",
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "baevsky_si": {
+            "title": "Baevsky Si",
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "has_signals": {
+            "title": "Has Signals",
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "Base properties"
+      },
+      "HRSensor": {
+        "title": "HRSensor",
+        "enum": [
+          "SMARTPHONE_BUILTIN_SENSOR",
+          "BEURER_PO80_TRANSMISSIVE_PULSE_OXIMETER",
+          "PHILIPS_MP5SC",
+          "MIO_ALPHA_II_HEART_RATE_WATCH_2X",
+          "CMS50E",
+          "FIBRICHECK_APP",
+          "CONTEC_CMS60C"
+        ],
+        "description": "An enumeration."
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "LightingBrightness": {
+        "title": "LightingBrightness",
+        "enum": [
+          "DARK",
+          "DIM",
+          "WELL_LIT",
+          "BRIGHT",
+          "OVEREXPOSED"
+        ],
+        "description": "An enumeration."
+      },
+      "LightingKind": {
+        "title": "LightingKind",
+        "enum": [
+          "ARTIFICIAL",
+          "NATURAL",
+          "ARTIFICIAL_NATURAL"
+        ],
+        "description": "An enumeration."
+      },
+      "MeasuringSensors": {
+        "title": "MeasuringSensors",
+        "type": "object",
+        "properties": {
+          "hr_sensor": {
+            "$ref": "#/components/schemas/HRSensor"
+          },
+          "rr_sensor": {
+            "$ref": "#/components/schemas/RRSensor"
+          },
+          "bp_sensor": {
+            "$ref": "#/components/schemas/BPSensor"
+          },
+          "o2_sensor": {
+            "$ref": "#/components/schemas/O2Sensor"
+          },
+          "ppg_sensor": {
+            "$ref": "#/components/schemas/PPGSensor"
+          },
+          "anxiety_sensor": {
+            "$ref": "#/components/schemas/AnxietySensor"
+          }
+        }
+      },
+      "O2Sensor": {
+        "title": "O2Sensor",
+        "enum": [
+          "BEURER_PO80_TRANSMISSIVE_PULSE_OXIMETER",
+          "SMARTPHONE_BUILTIN_SENSOR",
+          "PHILIPS_MP5SC",
+          "CONTEC_CMS60C",
+          "CMS50E"
+        ],
+        "description": "An enumeration."
+      },
+      "PPGSensor": {
+        "title": "PPGSensor",
+        "enum": [
+          "SMARTPHONE_BUILTIN_SENSOR",
+          "BEURER_PO80_TRANSMISSIVE_PULSE_OXIMETER",
+          "PHILIPS_MP5SC",
+          "CMS50E",
+          "EMPATICA_E4_WRISTBAND",
+          "CONTEC_CMS60C"
+        ],
+        "description": "An enumeration."
+      },
+      "RRSensor": {
+        "title": "RRSensor",
+        "enum": [
+          "MANUAL_COUNTING",
+          "MASSIMO_RRP",
+          "PHILIPS_MP5SC",
+          "BREATHING_PACE_GUIDE"
+        ],
+        "description": "An enumeration."
+      },
+      "RecordingSettings": {
+        "title": "RecordingSettings",
+        "type": "object",
+        "properties": {
+          "distance_to_camera": {
+            "title": "Distance To Camera",
+            "type": "number"
+          },
+          "lighting_kind": {
+            "$ref": "#/components/schemas/LightingKind"
+          },
+          "recording_setup": {
+            "$ref": "#/components/schemas/RecordingSetup"
+          },
+          "lighting_brightness": {
+            "$ref": "#/components/schemas/LightingBrightness"
+          }
+        }
+      },
+      "RecordingSetup": {
+        "title": "RecordingSetup",
+        "enum": [
+          "HANDHELD",
+          "TRIPOD"
+        ],
+        "description": "An enumeration."
+      },
+      "Sex": {
+        "title": "Sex",
+        "enum": [
+          "F",
+          "M"
+        ],
+        "description": "An enumeration."
+      },
+      "SkinTypeFP": {
+        "title": "SkinTypeFP",
+        "enum": [
+          "PALE",
+          "WHITE",
+          "OLIVE",
+          "LIGHTBROWN",
+          "DARKBROWN",
+          "BLACK"
+        ],
+        "description": "An enumeration."
+      },
+      "StringFilter": {
+        "title": "StringFilter",
+        "type": "object",
+        "properties": {
+          "includes": {
+            "title": "Includes",
+            "type": "string"
+          },
+          "exact": {
+            "title": "Exact",
+            "type": "string"
+          },
+          "begin": {
+            "title": "Begin",
+            "type": "string"
+          },
+          "end": {
+            "title": "End",
+            "type": "string"
+          }
+        }
+      },
+      "SubjectActivity": {
+        "title": "SubjectActivity",
+        "enum": [
+          "LAYING",
+          "SITTING",
+          "STANDING",
+          "SLOW_MOVEMENT",
+          "WALKING",
+          "RUNNING",
+          "CYCLING",
+          "JUMPING",
+          "OTHERSPORT"
+        ],
+        "description": "An enumeration."
+      },
+      "SubjectSpecifics": {
+        "title": "SubjectSpecifics",
+        "type": "object",
+        "properties": {
+          "age": {
+            "title": "Age",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "medical_condition": {
+            "title": "Medical Condition",
+            "type": "string"
+          },
+          "sex": {
+            "$ref": "#/components/schemas/Sex"
+          },
+          "ethnicity": {
+            "$ref": "#/components/schemas/Ethnicity"
+          },
+          "subject_activity": {
+            "$ref": "#/components/schemas/SubjectActivity"
+          },
+          "skin_type_fp": {
+            "$ref": "#/components/schemas/SkinTypeFP"
+          }
+        }
+      },
+      "TagRequest": {
+        "title": "TagRequest",
+        "required": [
+          "tag"
+        ],
+        "type": "object",
+        "properties": {
+          "tag": {
+            "title": "Tag",
+            "type": "string"
+          }
+        }
+      },
+      "UploadVideoRunResult": {
+        "title": "UploadVideoRunResult",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "video_id": {
+            "title": "Video Id",
+            "type": "string",
+            "default": ""
+          },
+          "hr": {
+            "title": "Hr",
+            "maximum": 220.0,
+            "minimum": 35.0,
+            "type": "number"
+          },
+          "o2": {
+            "title": "O2",
+            "maximum": 100.0,
+            "minimum": 70.0,
+            "type": "number"
+          },
+          "rr": {
+            "title": "Rr",
+            "maximum": 70.0,
+            "minimum": 4.0,
+            "type": "number"
+          },
+          "bp_sys": {
+            "title": "Bp Sys",
+            "maximum": 200.0,
+            "minimum": 70.0,
+            "type": "number"
+          },
+          "bp_dia": {
+            "title": "Bp Dia",
+            "maximum": 120.0,
+            "minimum": 50.0,
+            "type": "number"
+          },
+          "ibis_ms": {
+            "title": "Ibis Ms",
+            "maximum": 1500.0,
+            "minimum": 333.0,
+            "type": "number"
+          },
+          "anxiety": {
+            "title": "Anxiety",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "rmssd": {
+            "title": "Rmssd",
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "baevsky_si": {
+            "title": "Baevsky Si",
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "has_signals": {
+            "title": "Has Signals",
+            "type": "boolean",
+            "default": false
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string",
+            "default": ""
+          },
+          "error": {
+            "$ref": "#/components/schemas/VideoRunError"
+          }
+        },
+        "description": "Base properties"
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "VideoDetails": {
+        "title": "VideoDetails",
+        "required": [
+          "video_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "video_name": {
+            "title": "Video Name",
+            "type": "string"
+          },
+          "video_settings": {
+            "title": "Video Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VideoSettings"
+              }
+            ],
+            "default": {
+              
+            }
+          },
+          "measuring_sensors": {
+            "title": "Measuring Sensors",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasuringSensors"
+              }
+            ],
+            "default": {
+              
+            }
+          },
+          "subject_specifics": {
+            "title": "Subject Specifics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectSpecifics"
+              }
+            ],
+            "default": {
+              
+            }
+          },
+          "recording_settings": {
+            "title": "Recording Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RecordingSettings"
+              }
+            ],
+            "default": {
+              
+            }
+          },
+          "geographical_info": {
+            "title": "Geographical Info",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeographicalInfo"
+              }
+            ],
+            "default": {
+              
+            }
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "format": "date-time",
+            "default": "2023-06-07T15:46:23.982644"
+          },
+          "original_dataset": {
+            "title": "Original Dataset",
+            "type": "string"
+          },
+          "last_chunk_overlap": {
+            "title": "Last Chunk Overlap",
+            "type": "integer",
+            "default": 0
+          },
+          "verified": {
+            "title": "Verified",
+            "type": "boolean",
+            "default": false
+          },
+          "other_info": {
+            "title": "Other Info",
+            "type": "string"
+          },
+          "original_path": {
+            "title": "Original Path",
+            "type": "string"
+          },
+          "ground_truth": {
+            "$ref": "#/components/schemas/GroundTruthValues"
+          }
+        },
+        "description": "Base properties"
+      },
+      "VideoFilter": {
+        "title": "VideoFilter",
+        "type": "object",
+        "properties": {
+          "video_name": {
+            "$ref": "#/components/schemas/StringFilter"
+          },
+          "original_dataset": {
+            "$ref": "#/components/schemas/StringFilter"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/DatetimeFilter"
+          },
+          "subject_activity": {
+            "$ref": "#/components/schemas/StringFilter"
+          },
+          "lighting_brightness": {
+            "$ref": "#/components/schemas/StringFilter"
+          },
+          "verified": {
+            "$ref": "#/components/schemas/BooleanFilter"
+          }
+        }
+      },
+      "VideoRunError": {
+        "title": "VideoRunError",
+        "required": [
+          "error_message",
+          "error_type",
+          "stack_trace"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "error_message": {
+            "title": "Error Message",
+            "type": "string"
+          },
+          "error_type": {
+            "title": "Error Type",
+            "type": "string"
+          },
+          "stack_trace": {
+            "title": "Stack Trace",
+            "type": "string"
+          }
+        },
+        "description": "Base properties"
+      },
+      "VideoSettings": {
+        "title": "VideoSettings",
+        "type": "object",
+        "properties": {
+          "fps": {
+            "title": "Fps",
+            "type": "number"
+          },
+          "bitdepth": {
+            "title": "Bitdepth",
+            "type": "integer"
+          },
+          "bitrate": {
+            "title": "Bitrate",
+            "type": "number"
+          },
+          "resolution": {
+            "title": "Resolution",
+            "type": "string"
+          },
+          "camera_model": {
+            "title": "Camera Model",
+            "type": "string"
+          },
+          "codec": {
+            "$ref": "#/components/schemas/CodingStandard"
+          },
+          "compression": {
+            "$ref": "#/components/schemas/Compression"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
